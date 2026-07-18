@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "name": "Poster maker",
+  "edgeStyle": "curved",
+  "nodes": [
+    {
+      "id": "prompt-1",
+      "type": "prompt",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "prompt": "",
+        "customTitle": "Poster idea",
+        "status": null,
+        "error": null
+      }
+    },
+    {
+      "id": "nanoBanana-1",
+      "type": "nanoBanana",
+      "position": {
+        "x": 420,
+        "y": 0
+      },
+      "data": {
+        "model": "nano-banana-pro",
+        "aspectRatio": "2:3",
+        "resolution": "1K",
+        "inputImages": [],
+        "inputPrompt": "",
+        "outputImage": null,
+        "imageHistory": [],
+        "status": null,
+        "error": null,
+        "inlinePrompt": "A bold, minimal poster of: {input}. Strong typography, striking composition."
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "output",
+      "position": {
+        "x": 860,
+        "y": 0
+      },
+      "data": {
+        "image": null,
+        "customTitle": "Poster",
+        "status": null,
+        "error": null
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "prompt-1",
+      "target": "nanoBanana-1",
+      "targetHandle": "text"
+    },
+    {
+      "id": "e2",
+      "source": "nanoBanana-1",
+      "target": "output-1",
+      "targetHandle": "image"
+    }
+  ],
+  "templateInterface": {
+    "inputs": [
+      {
+        "key": "Poster idea",
+        "name": "Poster idea",
+        "type": "text",
+        "nodeId": "prompt-1",
+        "nodeType": "prompt",
+        "hasValue": false
+      }
+    ],
+    "outputs": [
+      {
+        "key": "Poster",
+        "name": "Poster",
+        "nodeId": "output-1",
+        "nodeType": "output"
+      }
+    ]
+  }
+}

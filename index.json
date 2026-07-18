@@ -1,0 +1,16 @@
+{
+  "templates": [
+    {
+      "id": "poster-maker",
+      "name": "Poster maker",
+      "author": "csprech",
+      "file": "poster-maker.json",
+      "description": "Type a line, get a poster. Prompt \u2192 image \u2192 output.",
+      "tags": [
+        "image",
+        "starter"
+      ],
+      "nodeCount": 3
+    }
+  ]
+}
