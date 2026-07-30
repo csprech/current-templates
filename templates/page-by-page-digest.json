@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "name": "Page-by-page digest",
+  "nodes": [
+    {
+      "id": "doc",
+      "type": "documentInput",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "document": null,
+        "filename": null,
+        "pageCount": null,
+        "selectedPage": 1,
+        "pageTexts": [],
+        "outputImage": null,
+        "outputText": null,
+        "batchPages": true,
+        "customTitle": "Report",
+        "comment": "Drop in a PDF — All pages feeds every page to the model, one run each"
+      },
+      "style": {
+        "width": 320,
+        "height": 400
+      }
+    },
+    {
+      "id": "digest",
+      "type": "llmGenerate",
+      "position": {
+        "x": 460,
+        "y": 30
+      },
+      "data": {
+        "inputPrompt": null,
+        "inputImages": [],
+        "outputText": null,
+        "provider": "google",
+        "model": "gemini-3-flash-preview",
+        "temperature": 0.7,
+        "maxTokens": 8192,
+        "status": null,
+        "error": null,
+        "inlinePrompt": "Summarize this page in two crisp sentences. Note any figure worth a closer look."
+      },
+      "style": {
+        "width": 320,
+        "height": 360
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-doc--digest--text",
+      "source": "doc",
+      "target": "digest",
+      "sourceHandle": "text",
+      "targetHandle": "text"
+    }
+  ],
+  "edgeStyle": "curved",
+  "templateInterface": {
+    "inputs": [],
+    "outputs": []
+  }
+}

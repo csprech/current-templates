@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "name": "Inpaint anything",
+  "nodes": [
+    {
+      "id": "photo",
+      "type": "imageInput",
+      "position": {
+        "x": 0,
+        "y": 60
+      },
+      "data": {
+        "image": null,
+        "filename": null,
+        "dimensions": null,
+        "customTitle": "Photo"
+      },
+      "style": {
+        "width": 300,
+        "height": 280
+      }
+    },
+    {
+      "id": "mask",
+      "type": "annotation",
+      "position": {
+        "x": 400,
+        "y": 40
+      },
+      "data": {
+        "sourceImage": null,
+        "annotations": [],
+        "outputImage": null,
+        "comment": "Open, choose the Mask tool, and paint the region that should change"
+      },
+      "style": {
+        "width": 300,
+        "height": 280
+      }
+    },
+    {
+      "id": "wish",
+      "type": "prompt",
+      "position": {
+        "x": 400,
+        "y": 420
+      },
+      "data": {
+        "prompt": "Replace the masked area with wildflowers in soft morning light.",
+        "customTitle": "What appears"
+      },
+      "style": {
+        "width": 320,
+        "height": 300
+      }
+    },
+    {
+      "id": "gen",
+      "type": "nanoBanana",
+      "position": {
+        "x": 840,
+        "y": 100
+      },
+      "data": {
+        "inputImages": [],
+        "inputPrompt": null,
+        "outputImage": null,
+        "aspectRatio": "1:1",
+        "resolution": "1K",
+        "model": "nano-banana-pro",
+        "selectedModel": {
+          "provider": "gemini",
+          "modelId": "nano-banana-pro",
+          "displayName": "Nano Banana Pro"
+        },
+        "useGoogleSearch": false,
+        "useImageSearch": false,
+        "status": null,
+        "error": null,
+        "imageHistory": [],
+        "selectedHistoryIndex": null
+      },
+      "style": {
+        "width": 300,
+        "height": 300
+      }
+    },
+    {
+      "id": "out",
+      "type": "output",
+      "position": {
+        "x": 1240,
+        "y": 80
+      },
+      "data": {
+        "image": null,
+        "outputFilename": "",
+        "video": null,
+        "audio": null
+      },
+      "style": {
+        "width": 320,
+        "height": 320
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-photo--mask--image",
+      "source": "photo",
+      "target": "mask",
+      "sourceHandle": "image",
+      "targetHandle": "image"
+    },
+    {
+      "id": "e-mask--gen--image",
+      "source": "mask",
+      "target": "gen",
+      "sourceHandle": "image",
+      "targetHandle": "image"
+    },
+    {
+      "id": "e-mask--gen--mask",
+      "source": "mask",
+      "target": "gen",
+      "sourceHandle": "mask",
+      "targetHandle": "mask"
+    },
+    {
+      "id": "e-wish--gen--text",
+      "source": "wish",
+      "target": "gen",
+      "sourceHandle": "text",
+      "targetHandle": "text"
+    },
+    {
+      "id": "e-gen--out--image",
+      "source": "gen",
+      "target": "out",
+      "sourceHandle": "image",
+      "targetHandle": "image"
+    }
+  ],
+  "edgeStyle": "curved",
+  "templateInterface": {
+    "inputs": [
+      {
+        "key": "Photo",
+        "name": "Photo",
+        "type": "image",
+        "nodeId": "photo",
+        "nodeType": "imageInput",
+        "hasValue": false
+      },
+      {
+        "key": "What appears",
+        "name": "What appears",
+        "type": "text",
+        "nodeId": "wish",
+        "nodeType": "prompt",
+        "hasValue": true
+      }
+    ],
+    "outputs": [
+      {
+        "key": "out",
+        "name": "Output",
+        "nodeId": "out",
+        "nodeType": "output"
+      }
+    ]
+  }
+}

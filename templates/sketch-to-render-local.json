@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "name": "Sketch to render, locally",
+  "nodes": [
+    {
+      "id": "source",
+      "type": "imageInput",
+      "position": {
+        "x": 0,
+        "y": 60
+      },
+      "data": {
+        "image": null,
+        "filename": null,
+        "dimensions": null,
+        "customTitle": "Sketch or photo"
+      },
+      "style": {
+        "width": 300,
+        "height": 280
+      }
+    },
+    {
+      "id": "edges",
+      "type": "imageAction",
+      "position": {
+        "x": 400,
+        "y": 40
+      },
+      "data": {
+        "operation": "canny",
+        "params": {},
+        "outputImage": null,
+        "status": null,
+        "error": null,
+        "comment": "Edge detection runs on-device, free — the hint map feeds the Control input"
+      },
+      "style": {
+        "width": 320,
+        "height": 340
+      }
+    },
+    {
+      "id": "look",
+      "type": "prompt",
+      "position": {
+        "x": 400,
+        "y": 430
+      },
+      "data": {
+        "prompt": "A cozy cabin interior at dusk, warm lamplight, photoreal render.",
+        "customTitle": "Look"
+      },
+      "style": {
+        "width": 320,
+        "height": 300
+      }
+    },
+    {
+      "id": "gen",
+      "type": "nanoBanana",
+      "position": {
+        "x": 850,
+        "y": 100
+      },
+      "data": {
+        "inputImages": [],
+        "inputPrompt": null,
+        "outputImage": null,
+        "aspectRatio": "1:1",
+        "resolution": "1K",
+        "model": "nano-banana-pro",
+        "selectedModel": {
+          "provider": "comfyui",
+          "modelId": "",
+          "displayName": "Choose a local checkpoint"
+        },
+        "useGoogleSearch": false,
+        "useImageSearch": false,
+        "status": null,
+        "error": null,
+        "imageHistory": [],
+        "selectedHistoryIndex": null,
+        "comment": "Browse picks one of your installed ComfyUI checkpoints; set a canny ControlNet in its parameters"
+      },
+      "style": {
+        "width": 300,
+        "height": 300
+      }
+    },
+    {
+      "id": "out",
+      "type": "output",
+      "position": {
+        "x": 1250,
+        "y": 80
+      },
+      "data": {
+        "image": null,
+        "outputFilename": "",
+        "video": null,
+        "audio": null
+      },
+      "style": {
+        "width": 320,
+        "height": 320
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-source--edges--image",
+      "source": "source",
+      "target": "edges",
+      "sourceHandle": "image",
+      "targetHandle": "image"
+    },
+    {
+      "id": "e-edges--gen--control",
+      "source": "edges",
+      "target": "gen",
+      "sourceHandle": "image",
+      "targetHandle": "control"
+    },
+    {
+      "id": "e-look--gen--text",
+      "source": "look",
+      "target": "gen",
+      "sourceHandle": "text",
+      "targetHandle": "text"
+    },
+    {
+      "id": "e-gen--out--image",
+      "source": "gen",
+      "target": "out",
+      "sourceHandle": "image",
+      "targetHandle": "image"
+    }
+  ],
+  "edgeStyle": "curved",
+  "templateInterface": {
+    "inputs": [
+      {
+        "key": "Sketch or photo",
+        "name": "Sketch or photo",
+        "type": "image",
+        "nodeId": "source",
+        "nodeType": "imageInput",
+        "hasValue": false
+      },
+      {
+        "key": "Look",
+        "name": "Look",
+        "type": "text",
+        "nodeId": "look",
+        "nodeType": "prompt",
+        "hasValue": true
+      }
+    ],
+    "outputs": [
+      {
+        "key": "out",
+        "name": "Output",
+        "nodeId": "out",
+        "nodeType": "output"
+      }
+    ]
+  }
+}

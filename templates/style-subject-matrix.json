@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "name": "Style × subject matrix",
+  "nodes": [
+    {
+      "id": "styles",
+      "type": "array",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "inputText": "watercolor\nrisograph print\nfilm noir",
+        "splitMode": "newline",
+        "delimiter": "*",
+        "regexPattern": "",
+        "trimItems": true,
+        "removeEmpty": true,
+        "batchMode": true,
+        "selectedOutputIndex": null,
+        "outputItems": [
+          "watercolor",
+          "risograph print",
+          "film noir"
+        ],
+        "outputText": null,
+        "error": null,
+        "customTitle": "Styles",
+        "variableName": "style"
+      },
+      "style": {
+        "width": 340,
+        "height": 240
+      }
+    },
+    {
+      "id": "subjects",
+      "type": "array",
+      "position": {
+        "x": 0,
+        "y": 300
+      },
+      "data": {
+        "inputText": "a lighthouse at dusk\na busy street market",
+        "splitMode": "newline",
+        "delimiter": "*",
+        "regexPattern": "",
+        "trimItems": true,
+        "removeEmpty": true,
+        "batchMode": true,
+        "selectedOutputIndex": null,
+        "outputItems": [
+          "a lighthouse at dusk",
+          "a busy street market"
+        ],
+        "outputText": null,
+        "error": null,
+        "customTitle": "Subjects",
+        "variableName": "subject"
+      },
+      "style": {
+        "width": 340,
+        "height": 240
+      }
+    },
+    {
+      "id": "combine",
+      "type": "promptConstructor",
+      "position": {
+        "x": 440,
+        "y": 130
+      },
+      "data": {
+        "template": "A @style illustration of @subject, one cohesive series",
+        "outputText": null,
+        "unresolvedVars": [],
+        "customTitle": "Series prompt"
+      },
+      "style": {
+        "width": 340,
+        "height": 340
+      }
+    },
+    {
+      "id": "gen",
+      "type": "nanoBanana",
+      "position": {
+        "x": 880,
+        "y": 120
+      },
+      "data": {
+        "inputImages": [],
+        "inputPrompt": null,
+        "outputImage": null,
+        "aspectRatio": "1:1",
+        "resolution": "1K",
+        "model": "nano-banana-pro",
+        "selectedModel": {
+          "provider": "gemini",
+          "modelId": "nano-banana-pro",
+          "displayName": "Nano Banana Pro"
+        },
+        "useGoogleSearch": false,
+        "useImageSearch": false,
+        "status": null,
+        "error": null,
+        "imageHistory": [],
+        "selectedHistoryIndex": null,
+        "comment": "Runs once per style × subject combination — six images from one click"
+      },
+      "style": {
+        "width": 300,
+        "height": 300
+      }
+    },
+    {
+      "id": "gallery",
+      "type": "outputGallery",
+      "position": {
+        "x": 1280,
+        "y": 90
+      },
+      "data": {
+        "images": [],
+        "videos": [],
+        "image": null,
+        "video": null,
+        "audio": null
+      },
+      "style": {
+        "width": 320,
+        "height": 360
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-styles--combine--text",
+      "source": "styles",
+      "target": "combine",
+      "sourceHandle": "text",
+      "targetHandle": "text"
+    },
+    {
+      "id": "e-subjects--combine--text",
+      "source": "subjects",
+      "target": "combine",
+      "sourceHandle": "text",
+      "targetHandle": "text"
+    },
+    {
+      "id": "e-combine--gen--text",
+      "source": "combine",
+      "target": "gen",
+      "sourceHandle": "text",
+      "targetHandle": "text"
+    },
+    {
+      "id": "e-gen--gallery--image",
+      "source": "gen",
+      "target": "gallery",
+      "sourceHandle": "image",
+      "targetHandle": "image"
+    }
+  ],
+  "edgeStyle": "curved",
+  "templateInterface": {
+    "inputs": [],
+    "outputs": [
+      {
+        "key": "gallery",
+        "name": "Gallery",
+        "nodeId": "gallery",
+        "nodeType": "outputGallery"
+      }
+    ]
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "name": "Art director",
+  "nodes": [
+    {
+      "id": "product",
+      "type": "prompt",
+      "position": {
+        "x": 0,
+        "y": 60
+      },
+      "data": {
+        "prompt": "Hand-thrown ceramic mugs from a small-batch studio.",
+        "customTitle": "Product"
+      },
+      "style": {
+        "width": 320,
+        "height": 300
+      }
+    },
+    {
+      "id": "director",
+      "type": "llmGenerate",
+      "position": {
+        "x": 420,
+        "y": 20
+      },
+      "data": {
+        "inputPrompt": null,
+        "inputImages": [],
+        "outputText": null,
+        "provider": "google",
+        "model": "gemini-3-flash-preview",
+        "temperature": 0.7,
+        "maxTokens": 8192,
+        "status": null,
+        "error": null,
+        "inlinePrompt": "Research current visual trends for this product category, then write one vivid, specific image prompt for a hero shot. Reply with the prompt only.",
+        "webSearch": true,
+        "reasoningEffort": "standard"
+      },
+      "style": {
+        "width": 320,
+        "height": 360
+      }
+    },
+    {
+      "id": "gen",
+      "type": "nanoBanana",
+      "position": {
+        "x": 860,
+        "y": 80
+      },
+      "data": {
+        "inputImages": [],
+        "inputPrompt": null,
+        "outputImage": null,
+        "aspectRatio": "1:1",
+        "resolution": "1K",
+        "model": "nano-banana-pro",
+        "selectedModel": {
+          "provider": "gemini",
+          "modelId": "nano-banana-pro",
+          "displayName": "Nano Banana Pro"
+        },
+        "useGoogleSearch": false,
+        "useImageSearch": false,
+        "status": null,
+        "error": null,
+        "imageHistory": [],
+        "selectedHistoryIndex": null
+      },
+      "style": {
+        "width": 300,
+        "height": 300
+      }
+    },
+    {
+      "id": "out",
+      "type": "output",
+      "position": {
+        "x": 1260,
+        "y": 60
+      },
+      "data": {
+        "image": null,
+        "outputFilename": "",
+        "video": null,
+        "audio": null
+      },
+      "style": {
+        "width": 320,
+        "height": 320
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-product--director--text",
+      "source": "product",
+      "target": "director",
+      "sourceHandle": "text",
+      "targetHandle": "text"
+    },
+    {
+      "id": "e-director--gen--text",
+      "source": "director",
+      "target": "gen",
+      "sourceHandle": "text",
+      "targetHandle": "text"
+    },
+    {
+      "id": "e-gen--out--image",
+      "source": "gen",
+      "target": "out",
+      "sourceHandle": "image",
+      "targetHandle": "image"
+    }
+  ],
+  "edgeStyle": "curved",
+  "templateInterface": {
+    "inputs": [
+      {
+        "key": "Product",
+        "name": "Product",
+        "type": "text",
+        "nodeId": "product",
+        "nodeType": "prompt",
+        "hasValue": true
+      }
+    ],
+    "outputs": [
+      {
+        "key": "out",
+        "name": "Output",
+        "nodeId": "out",
+        "nodeType": "output"
+      }
+    ]
+  }
+}

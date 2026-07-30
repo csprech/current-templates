@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "name": "Still to motion",
+  "nodes": [
+    {
+      "id": "scene",
+      "type": "prompt",
+      "position": {
+        "x": 0,
+        "y": 80
+      },
+      "data": {
+        "prompt": "A paper boat drifting through neon-lit rain puddles, reflections everywhere.",
+        "customTitle": "Scene"
+      },
+      "style": {
+        "width": 320,
+        "height": 300
+      }
+    },
+    {
+      "id": "still",
+      "type": "nanoBanana",
+      "position": {
+        "x": 420,
+        "y": 40
+      },
+      "data": {
+        "inputImages": [],
+        "inputPrompt": null,
+        "outputImage": null,
+        "aspectRatio": "1:1",
+        "resolution": "1K",
+        "model": "nano-banana-pro",
+        "selectedModel": {
+          "provider": "gemini",
+          "modelId": "nano-banana-pro",
+          "displayName": "Nano Banana Pro"
+        },
+        "useGoogleSearch": false,
+        "useImageSearch": false,
+        "status": null,
+        "error": null,
+        "imageHistory": [],
+        "selectedHistoryIndex": null
+      },
+      "style": {
+        "width": 300,
+        "height": 300
+      }
+    },
+    {
+      "id": "motion",
+      "type": "generateVideo",
+      "position": {
+        "x": 840,
+        "y": 60
+      },
+      "data": {
+        "inputImages": [],
+        "inputPrompt": null,
+        "outputVideo": null,
+        "status": null,
+        "error": null,
+        "videoHistory": [],
+        "selectedVideoHistoryIndex": 0,
+        "comment": "Browse picks the video model — the generated still becomes its start frame"
+      },
+      "style": {
+        "width": 300,
+        "height": 300
+      }
+    },
+    {
+      "id": "out",
+      "type": "output",
+      "position": {
+        "x": 1260,
+        "y": 60
+      },
+      "data": {
+        "image": null,
+        "outputFilename": "",
+        "video": null,
+        "audio": null
+      },
+      "style": {
+        "width": 320,
+        "height": 320
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-scene--still--text",
+      "source": "scene",
+      "target": "still",
+      "sourceHandle": "text",
+      "targetHandle": "text"
+    },
+    {
+      "id": "e-still--motion--image",
+      "source": "still",
+      "target": "motion",
+      "sourceHandle": "image",
+      "targetHandle": "image"
+    },
+    {
+      "id": "e-scene--motion--text",
+      "source": "scene",
+      "target": "motion",
+      "sourceHandle": "text",
+      "targetHandle": "text"
+    },
+    {
+      "id": "e-motion--out--image",
+      "source": "motion",
+      "target": "out",
+      "sourceHandle": "video",
+      "targetHandle": "image"
+    }
+  ],
+  "edgeStyle": "curved",
+  "templateInterface": {
+    "inputs": [
+      {
+        "key": "Scene",
+        "name": "Scene",
+        "type": "text",
+        "nodeId": "scene",
+        "nodeType": "prompt",
+        "hasValue": true
+      }
+    ],
+    "outputs": [
+      {
+        "key": "out",
+        "name": "Output",
+        "nodeId": "out",
+        "nodeType": "output"
+      }
+    ]
+  }
+}

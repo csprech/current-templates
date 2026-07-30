@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "name": "Poster, composed",
+  "nodes": [
+    {
+      "id": "art",
+      "type": "imageInput",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "image": null,
+        "filename": null,
+        "dimensions": null,
+        "customTitle": "Artwork"
+      },
+      "style": {
+        "width": 300,
+        "height": 280
+      }
+    },
+    {
+      "id": "logo",
+      "type": "imageInput",
+      "position": {
+        "x": 0,
+        "y": 340
+      },
+      "data": {
+        "image": null,
+        "filename": null,
+        "dimensions": null,
+        "customTitle": "Logo"
+      },
+      "style": {
+        "width": 300,
+        "height": 280
+      }
+    },
+    {
+      "id": "compose",
+      "type": "layerEditor",
+      "position": {
+        "x": 420,
+        "y": 150
+      },
+      "data": {
+        "canvasWidth": 1024,
+        "canvasHeight": 1024,
+        "layers": [],
+        "outputImage": null,
+        "status": null,
+        "error": null,
+        "comment": "Open the editor: place, scale, add type — the flattened frame feeds the generator"
+      },
+      "style": {
+        "width": 340,
+        "height": 320
+      }
+    },
+    {
+      "id": "brief",
+      "type": "prompt",
+      "position": {
+        "x": 420,
+        "y": 520
+      },
+      "data": {
+        "prompt": "Refine this layout into a premium campaign poster. Keep the composition and palette exactly as arranged.",
+        "customTitle": "Direction"
+      },
+      "style": {
+        "width": 320,
+        "height": 300
+      }
+    },
+    {
+      "id": "gen",
+      "type": "nanoBanana",
+      "position": {
+        "x": 860,
+        "y": 170
+      },
+      "data": {
+        "inputImages": [],
+        "inputPrompt": null,
+        "outputImage": null,
+        "aspectRatio": "1:1",
+        "resolution": "1K",
+        "model": "nano-banana-pro",
+        "selectedModel": {
+          "provider": "gemini",
+          "modelId": "nano-banana-pro",
+          "displayName": "Nano Banana Pro"
+        },
+        "useGoogleSearch": false,
+        "useImageSearch": false,
+        "status": null,
+        "error": null,
+        "imageHistory": [],
+        "selectedHistoryIndex": null
+      },
+      "style": {
+        "width": 300,
+        "height": 300
+      }
+    },
+    {
+      "id": "out",
+      "type": "output",
+      "position": {
+        "x": 1260,
+        "y": 150
+      },
+      "data": {
+        "image": null,
+        "outputFilename": "",
+        "video": null,
+        "audio": null
+      },
+      "style": {
+        "width": 320,
+        "height": 320
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-art--compose--image",
+      "source": "art",
+      "target": "compose",
+      "sourceHandle": "image",
+      "targetHandle": "image"
+    },
+    {
+      "id": "e-logo--compose--image",
+      "source": "logo",
+      "target": "compose",
+      "sourceHandle": "image",
+      "targetHandle": "image"
+    },
+    {
+      "id": "e-compose--gen--image",
+      "source": "compose",
+      "target": "gen",
+      "sourceHandle": "image",
+      "targetHandle": "image"
+    },
+    {
+      "id": "e-brief--gen--text",
+      "source": "brief",
+      "target": "gen",
+      "sourceHandle": "text",
+      "targetHandle": "text"
+    },
+    {
+      "id": "e-gen--out--image",
+      "source": "gen",
+      "target": "out",
+      "sourceHandle": "image",
+      "targetHandle": "image"
+    }
+  ],
+  "edgeStyle": "curved",
+  "templateInterface": {
+    "inputs": [
+      {
+        "key": "Artwork",
+        "name": "Artwork",
+        "type": "image",
+        "nodeId": "art",
+        "nodeType": "imageInput",
+        "hasValue": false
+      },
+      {
+        "key": "Logo",
+        "name": "Logo",
+        "type": "image",
+        "nodeId": "logo",
+        "nodeType": "imageInput",
+        "hasValue": false
+      },
+      {
+        "key": "Direction",
+        "name": "Direction",
+        "type": "text",
+        "nodeId": "brief",
+        "nodeType": "prompt",
+        "hasValue": true
+      }
+    ],
+    "outputs": [
+      {
+        "key": "out",
+        "name": "Output",
+        "nodeId": "out",
+        "nodeType": "output"
+      }
+    ]
+  }
+}

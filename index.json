@@ -1,16 +1,109 @@
 {
   "templates": [
     {
-      "id": "poster-maker",
-      "name": "Poster maker",
-      "author": "csprech",
-      "file": "poster-maker.json",
-      "description": "Type a line, get a poster. Prompt \u2192 image \u2192 output.",
+      "id": "style-subject-matrix",
+      "name": "Style × subject matrix",
+      "author": "Current",
+      "file": "style-subject-matrix.json",
+      "description": "Two lists cross into one prompt template — six images from one run, collected in a gallery. Open the generator fullscreen (F) for the matrix view.",
       "tags": [
         "image",
-        "starter"
+        "batch",
+        "series"
       ],
-      "nodeCount": 3
+      "nodeCount": 5
+    },
+    {
+      "id": "poster-composed",
+      "name": "Poster, composed",
+      "author": "Current",
+      "file": "poster-composed.json",
+      "description": "Stack images and type in the Layer Editor, then let a generator polish the flattened frame — layout stays on the graph, nothing exported and re-imported.",
+      "tags": [
+        "image",
+        "layers",
+        "design"
+      ],
+      "nodeCount": 6
+    },
+    {
+      "id": "inpaint-anything",
+      "name": "Inpaint anything",
+      "author": "Current",
+      "file": "inpaint-anything.json",
+      "description": "Paint a mask over your photo and describe what should appear there — the mask rides its own wire into the generator's Mask input.",
+      "tags": [
+        "image",
+        "inpaint",
+        "editing"
+      ],
+      "nodeCount": 5
+    },
+    {
+      "id": "sketch-to-render-local",
+      "name": "Sketch to render, locally",
+      "author": "Current",
+      "file": "sketch-to-render-local.json",
+      "description": "On-device Canny edges steer a local ComfyUI checkpoint through its Control input — structure from your sketch, style from your prompt, $0 in API fees.",
+      "tags": [
+        "image",
+        "controlnet",
+        "local",
+        "free"
+      ],
+      "nodeCount": 5
+    },
+    {
+      "id": "page-by-page-digest",
+      "name": "Page-by-page digest",
+      "author": "Current",
+      "file": "page-by-page-digest.json",
+      "description": "A PDF becomes workflow data: every page's text fans out to the language model, one summary per page — reading a report becomes a single run.",
+      "tags": [
+        "document",
+        "llm",
+        "batch"
+      ],
+      "nodeCount": 2
+    },
+    {
+      "id": "technique-in-a-node",
+      "name": "A workflow inside a node",
+      "author": "Current",
+      "file": "technique-in-a-node.json",
+      "description": "The Workflow node runs a saved pipeline as a single step: its inputs become handles, its cost shows up front, and unchanged re-runs are free.",
+      "tags": [
+        "technique",
+        "compose",
+        "reuse"
+      ],
+      "nodeCount": 4
+    },
+    {
+      "id": "art-director",
+      "name": "Art director",
+      "author": "Current",
+      "file": "art-director.json",
+      "description": "A language model with web search researches the trend and writes the image prompt; the generator takes it from there. Change one line, get a new campaign.",
+      "tags": [
+        "llm",
+        "image",
+        "research"
+      ],
+      "nodeCount": 4
+    },
+    {
+      "id": "still-to-motion",
+      "name": "Still to motion",
+      "author": "Current",
+      "file": "still-to-motion.json",
+      "description": "One prompt drives both stages: generate the frame, then hand it to a video model as the start frame. Swap models freely at either stage.",
+      "tags": [
+        "image",
+        "video",
+        "pipeline"
+      ],
+      "nodeCount": 4
     }
   ]
 }

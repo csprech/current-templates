@@ -1,0 +1,272 @@
+{
+  "version": 1,
+  "name": "A workflow inside a node",
+  "nodes": [
+    {
+      "id": "photo",
+      "type": "imageInput",
+      "position": {
+        "x": 0,
+        "y": 40
+      },
+      "data": {
+        "image": null,
+        "filename": null,
+        "dimensions": null,
+        "customTitle": "Photo"
+      },
+      "style": {
+        "width": 300,
+        "height": 280
+      }
+    },
+    {
+      "id": "direction",
+      "type": "prompt",
+      "position": {
+        "x": 0,
+        "y": 400
+      },
+      "data": {
+        "prompt": "Golden hour, warm haze, quiet mood.",
+        "customTitle": "Art direction"
+      },
+      "style": {
+        "width": 320,
+        "height": 300
+      }
+    },
+    {
+      "id": "technique",
+      "type": "subworkflow",
+      "position": {
+        "x": 460,
+        "y": 120
+      },
+      "data": {
+        "workflowPath": null,
+        "workflowName": "Stylize",
+        "workflow": {
+          "nodes": [
+            {
+              "id": "photo",
+              "type": "imageInput",
+              "position": {
+                "x": 0,
+                "y": 40
+              },
+              "data": {
+                "image": null,
+                "filename": null,
+                "dimensions": null,
+                "customTitle": "Photo"
+              },
+              "style": {
+                "width": 300,
+                "height": 280
+              }
+            },
+            {
+              "id": "look",
+              "type": "prompt",
+              "position": {
+                "x": 0,
+                "y": 400
+              },
+              "data": {
+                "prompt": "Cinematic rim light, deep contrast, subtle film grain.",
+                "customTitle": "Look"
+              },
+              "style": {
+                "width": 320,
+                "height": 300
+              }
+            },
+            {
+              "id": "gen",
+              "type": "nanoBanana",
+              "position": {
+                "x": 440,
+                "y": 100
+              },
+              "data": {
+                "inputImages": [],
+                "inputPrompt": null,
+                "outputImage": null,
+                "aspectRatio": "1:1",
+                "resolution": "1K",
+                "model": "nano-banana-pro",
+                "selectedModel": {
+                  "provider": "gemini",
+                  "modelId": "nano-banana-pro",
+                  "displayName": "Nano Banana Pro"
+                },
+                "useGoogleSearch": false,
+                "useImageSearch": false,
+                "status": null,
+                "error": null,
+                "imageHistory": [],
+                "selectedHistoryIndex": null
+              },
+              "style": {
+                "width": 300,
+                "height": 300
+              }
+            },
+            {
+              "id": "out",
+              "type": "output",
+              "position": {
+                "x": 840,
+                "y": 80
+              },
+              "data": {
+                "image": null,
+                "outputFilename": "",
+                "video": null,
+                "audio": null
+              },
+              "style": {
+                "width": 320,
+                "height": 320
+              }
+            }
+          ],
+          "edges": [
+            {
+              "id": "e-photo--gen--image",
+              "source": "photo",
+              "target": "gen",
+              "sourceHandle": "image",
+              "targetHandle": "image"
+            },
+            {
+              "id": "e-look--gen--text",
+              "source": "look",
+              "target": "gen",
+              "sourceHandle": "text",
+              "targetHandle": "text"
+            },
+            {
+              "id": "e-gen--out--image",
+              "source": "gen",
+              "target": "out",
+              "sourceHandle": "image",
+              "targetHandle": "image"
+            }
+          ]
+        },
+        "templateInterface": {
+          "inputs": [
+            {
+              "key": "Photo",
+              "name": "Photo",
+              "type": "image",
+              "nodeId": "photo",
+              "nodeType": "imageInput",
+              "hasValue": false
+            },
+            {
+              "key": "Look",
+              "name": "Look",
+              "type": "text",
+              "nodeId": "look",
+              "nodeType": "prompt",
+              "hasValue": true
+            }
+          ],
+          "outputs": [
+            {
+              "key": "out",
+              "name": "Output",
+              "nodeId": "out",
+              "nodeType": "output"
+            }
+          ]
+        },
+        "status": null,
+        "error": null,
+        "outputImages": [],
+        "outputVideos": [],
+        "outputAudio": [],
+        "outputTexts": [],
+        "output3d": [],
+        "comment": "A whole saved workflow runs as this one node — swap it for any project via Change"
+      },
+      "style": {
+        "width": 340,
+        "height": 300
+      }
+    },
+    {
+      "id": "out",
+      "type": "output",
+      "position": {
+        "x": 920,
+        "y": 100
+      },
+      "data": {
+        "image": null,
+        "outputFilename": "",
+        "video": null,
+        "audio": null
+      },
+      "style": {
+        "width": 320,
+        "height": 320
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-photo--technique--image",
+      "source": "photo",
+      "target": "technique",
+      "sourceHandle": "image",
+      "targetHandle": "image"
+    },
+    {
+      "id": "e-direction--technique--text",
+      "source": "direction",
+      "target": "technique",
+      "sourceHandle": "text",
+      "targetHandle": "text"
+    },
+    {
+      "id": "e-technique--out--image",
+      "source": "technique",
+      "target": "out",
+      "sourceHandle": "image",
+      "targetHandle": "image"
+    }
+  ],
+  "edgeStyle": "curved",
+  "templateInterface": {
+    "inputs": [
+      {
+        "key": "Photo",
+        "name": "Photo",
+        "type": "image",
+        "nodeId": "photo",
+        "nodeType": "imageInput",
+        "hasValue": false
+      },
+      {
+        "key": "Art direction",
+        "name": "Art direction",
+        "type": "text",
+        "nodeId": "direction",
+        "nodeType": "prompt",
+        "hasValue": true
+      }
+    ],
+    "outputs": [
+      {
+        "key": "out",
+        "name": "Output",
+        "nodeId": "out",
+        "nodeType": "output"
+      }
+    ]
+  }
+}
